@@ -1,6 +1,6 @@
 import React from 'react'
 import { data } from './data'
-import { cato } from './cato'
+import  catoDefaultData  from './catoDefaultData'
 import { Flex, Box, Link, Text, UnorderedList, ListItem } from '@chakra-ui/react'
 import { dateNodeDefinition } from '../customComponents/DateTimePicker'
 import {
@@ -26,6 +26,7 @@ import { type Input } from 'object-property-assigner'
 import jsonSchema from './jsonSchema.json'
 import customNodesSchema from './customNodesSchema.json'
 import Ajv from 'ajv'
+//import defaultData from './defaultData'
 
 const ajv = new Ajv()
 const validateJsonSchema = ajv.compile(jsonSchema)
@@ -105,7 +106,9 @@ export const demoDataDefinitions: Record<string, DemoData> = {
     ),
     rootName: 'cato',
     collapse: 1,
-    data: cato,
+    data: catoDefaultData.cato,
+    restrictEdit: ({ value, path }) => typeof value === 'object' ||  path.includes('device_info'),
+    restrictAdd: ({ key }) => key !== 'actions',
     customNodeDefinitions: [dateNodeDefinition],
     // restrictEdit: ({ key }) => key === 'number',
     customTextEditorAvailable: true,

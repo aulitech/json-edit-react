@@ -89,7 +89,7 @@ function App() {
   const navigate = useLocation()[1]
   const searchString = useSearch()
   const queryParams = new URLSearchParams(searchString)
-  const selectedDataSet = queryParams.get('data') ?? 'intro'
+  const selectedDataSet = queryParams.get('data') ?? 'cato'
   const dataDefinition = demoDataDefinitions[selectedDataSet]
 
   const [state, setState] = useState<AppState>({
@@ -97,16 +97,16 @@ function App() {
     indent: 2,
     collapseLevel: dataDefinition.collapse ?? 2,
     collapseTime: 300,
-    showCount: 'When closed',
+    showCount: 'No',
     theme: defaultTheme,
     allowEdit: true,
-    allowDelete: true,
+    allowDelete: false,
     allowAdd: true,
-    allowCopy: true,
+    allowCopy: false,
     sortKeys: false,
     showIndices: true,
-    showStringQuotes: true,
-    defaultNewValue: 'New data!',
+    showStringQuotes: false,
+    defaultNewValue: '',
     searchText: '',
     customTextEditor: false,
   })
@@ -200,7 +200,7 @@ function App() {
         reset(newDataDefinition.data)
     }
 
-    if (selected === 'intro') navigate('./')
+    if (selected === 'cato') navigate('./')
     else navigate(`./?data=${selected}`)
   }
 
