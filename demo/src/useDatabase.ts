@@ -1,14 +1,15 @@
 import { getFirestore, doc, setDoc } from 'firebase/firestore'
 import { initializeApp } from 'firebase/app'
 import { useDocument } from 'react-firebase-hooks/firestore'
-import firebaseConfig from './firebaseConfig.json'
+//import firebaseConfig from './firebaseConfig.json'
 import { useMemo } from 'react'
 
-const firebaseApp = initializeApp(firebaseConfig)
+//const firebaseApp = initializeApp(firebaseConfig)
 
-const db = getFirestore(firebaseApp)
+//const db = getFirestore(firebaseApp)
 
 export const useDatabase = () => {
+  /*
   const [value, loading, error] = useDocument(
     doc(getFirestore(firebaseApp), 'json-edit-react', 'live_json_data')
   )
@@ -40,6 +41,14 @@ export const useDatabase = () => {
       { ...data, lastEdited: new Date().toISOString() },
       { merge: true }
     )
+  }
+    */
+
+  const liveData = {}
+  const loading = false
+  const error = null
+  const updateLiveData = async (data) => {
+    console.log(data)
   }
 
   return {

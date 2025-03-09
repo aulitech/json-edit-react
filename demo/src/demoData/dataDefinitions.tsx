@@ -1,5 +1,6 @@
 import React from 'react'
 import { data } from './data'
+import { cato } from './cato'
 import { Flex, Box, Link, Text, UnorderedList, ListItem } from '@chakra-ui/react'
 import { dateNodeDefinition } from '../customComponents/DateTimePicker'
 import {
@@ -91,6 +92,20 @@ export const demoDataDefinitions: Record<string, DemoData> = {
     rootName: 'data',
     collapse: 2,
     data: data.intro,
+    customNodeDefinitions: [dateNodeDefinition],
+    // restrictEdit: ({ key }) => key === 'number',
+    customTextEditorAvailable: true,
+  },
+  cato: {
+    name: '📘 Cato',
+    description: (
+      <Flex flexDir="column" gap={2}>
+        <Text>Play around with the JSON structure, and test out various options.</Text>
+      </Flex>
+    ),
+    rootName: 'cato',
+    collapse: 1,
+    data: cato,
     customNodeDefinitions: [dateNodeDefinition],
     // restrictEdit: ({ key }) => key === 'number',
     customTextEditorAvailable: true,
