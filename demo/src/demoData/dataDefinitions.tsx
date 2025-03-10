@@ -109,6 +109,7 @@ export const demoDataDefinitions: Record<string, DemoData> = {
     data: catoDefaultData.cato,
     restrictEdit: ({ value, path }) => typeof value === 'object' ||  path.includes('device_info'),
     restrictAdd: ({ key }) => key !== 'actions',
+    restrictTypeSelection:  true ,
     customNodeDefinitions: [dateNodeDefinition],
     // restrictEdit: ({ key }) => key === 'number',
     customTextEditorAvailable: true,

@@ -263,27 +263,42 @@ function App() {
         gap={4}
         minH="100%"
       >
-
         <VStack minW={400}>
-          <Heading size="lg" variant="accent">
-            Demo
-          </Heading>
+
           <Box position="relative">
-            <Input
-              id="searchTextInput"
-              placeholder={dataDefinition.searchPlaceholder ?? 'Search values'}
-              bgColor={'#f6f6f6'}
-              borderColor="gainsboro"
-              borderRadius={50}
-              size="sm"
-              w={60}
-              value={searchText}
-              onChange={(e) => updateState({ searchText: e.target.value })}
-              position="absolute"
-              right={2}
-              top={2}
-              zIndex={100}
-            />
+
+            <VStack w="100%" align="flex-end" gap={4}>
+              <HStack w="100%" justify='center'>
+                <Button
+                  colorScheme="primaryScheme"
+                  leftIcon={<ArrowBackIcon />}
+                  onClick={() => handleHistory(undo)}
+                  isDisabled={!canUndo}
+                >
+                  Undo
+                </Button>
+
+                <Button
+                  colorScheme="primaryScheme"
+                  rightIcon={<ArrowForwardIcon />}
+                  onClick={() => handleHistory(redo)}
+                  isDisabled={!canRedo}
+                >
+                  Redo
+                </Button>
+
+                <Button
+                  colorScheme="accentScheme"
+                  leftIcon={selectedDataSet === 'liveData' ? <AiOutlineCloudUpload /> : <BiReset />}
+                  variant="outline"
+                  onClick={handleReset}
+                  visibility={canUndo ? 'visible' : 'hidden'}
+                  isLoading={isSaving}
+                >
+                  {selectedDataSet === 'liveData' ? 'Push to the cloud' : 'Reset'}
+                </Button>
+              </HStack>
+            </VStack>
             <JsonEditor
               data={data}
               setData={setData as (data: JsonData) => void}
@@ -425,49 +440,9 @@ function App() {
               }
             />
           </Box>
-          <VStack w="100%" align="flex-end" gap={4}>
-            <HStack w="100%" justify="space-between" mt={4}>
-              <Button
-                colorScheme="primaryScheme"
-                leftIcon={<ArrowBackIcon />}
-                onClick={() => handleHistory(undo)}
-                isDisabled={!canUndo}
-              >
-                Undo
-              </Button>
-              <Spacer />
-              <Button
-                colorScheme="primaryScheme"
-                rightIcon={<ArrowForwardIcon />}
-                onClick={() => handleHistory(redo)}
-                isDisabled={!canRedo}
-              >
-                Redo
-              </Button>
-            </HStack>
-            <HStack justify="space-between" w="100%">
-              <Text maxW={400} fontSize="md">
-                Undo/Redo functionality can be incorporated by using an additional hook, such as{' '}
-                <Link href="https://github.com/homerchen19/use-undo" isExternal>
-                  use-undo
-                </Link>
-              </Text>
-              <Button
-                colorScheme="accentScheme"
-                leftIcon={selectedDataSet === 'liveData' ? <AiOutlineCloudUpload /> : <BiReset />}
-                variant="outline"
-                onClick={handleReset}
-                visibility={canUndo ? 'visible' : 'hidden'}
-                isLoading={isSaving}
-              >
-                {selectedDataSet === 'liveData' ? 'Push to the cloud' : 'Reset'}
-              </Button>
-            </HStack>
-          </VStack>
         </VStack>
-
       </Flex>
-      <Box h={50} />
+
       <footer>
         <Text fontSize="sm">{`json-edit-react v${version}`}</Text>
       </footer>
